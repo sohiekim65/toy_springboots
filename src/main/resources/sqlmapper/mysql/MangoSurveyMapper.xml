@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MangoSurvey">
+
+    <!-- 회원 전체 리스트 -->
+    <!-- call MangoSurvey.selectFromSurveyorList -->
+    <select id="selectFromSurveyorList" parameterType="Map" resultType="Map">
+        SELECT * 
+        FROM SURVEYOR
+    </select>
+
+    <!-- call MangoSurvey.selectSurveyorOneByUIDPassword -->
+    <select id="selectSurveyorOneByUIDPassword" parameterType="Map" resultType="Map">
+        SELECT * 
+        FROM SURVEYOR
+        WHERE USER_ID = #{user_id} AND PASSWORD = #{password}
+    </select>
+
+    <!-- call MangoSurvey.insertSurveyorJoinInfo -->
+    <insert id="insertSurveyorJoinInfo" parameterType="Map">
+        INSERT INTO SURVEYOR (USER_ID, NAME, BIRTH_DATE, PASSWORD, PHONE) 
+        VALUE (#{id-memeber}, #{name-member}, #{birth-member}, #{password-memeber}, #{phone0} "-" #{phone1} "-" #{phone2})
+    </insert>
+
+    <!-- call MangoSurvey.deleteSurveyorByUID -->
+    <delete id="deleteSurveyorByUID" parameterType="Map">
+        DELETE FROM SURVEYOR 
+        WHERE USER_ID = #{user_id}
+    </delete>
+
+    <!-- 수정할 회원 정보 UID로 가져오기 -->
+    <!-- call MangoSurvey.selectSurveyorOneByUID -->
+    <select id="selectSurveyorOneByUID" parameterType="Map" resultType="Map">
+        SELECT * 
+        FROM SURVEYOR
+        WHERE USER_ID = #{user_id}
+    </select>
+
+    <!-- call MangoSurvey.updateSurveyor -->
+    <update id="updateSurveyor" parameterType="Map">
+        UPDATE SURVEYOR 
+        SET NAME = #{name}, BIRTH_DATE=#{birth_date}, PHONE=#{phone} 
+        WHERE USER_ID = #{user_id}
+    </update>
+
+    <!-- call MangoSurvey.selectSurveyorSurveyResultByUID -->
+    <select id="selectSurveyorSurveyResultByUID" parameterType="Map" resultType="Map">
+        SELECT * FROM SURVEYOR
+        INNER JOIN USERS_ANSWER ON SURVEYOR.USER_ID = USERS_ANSWER.USER_ID INNER JOIN ANSWER
+        ON USERS_ANSWER.ANSWER_UID = ANSWER.ANSWER_UID
+        WHERE SURVEYOR.USER_ID = #{user_id}
+        ORDER BY QUESTION_UID
+    </select>
+
+    <!-- 설문문항 출력 -->
+    <!-- call MangoSurvey.selectFromQuestionList -->
+    <select id="selectFromQuestionList" parameterType="Map" resultType="Map">
+        SELECT * 
+        FROM QUESTION
+    </select>
+</mapper>
