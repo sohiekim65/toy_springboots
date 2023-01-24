@@ -27,7 +27,7 @@
               <c:when test="${empty resultMap}">
                 <div class="fs-3 text-center text-success opacity-75 pt-5 mb-3">${msg}</div>
                 <div class="text-center mt-3">
-                <a href="/mango/adminUserList" class="btn btn-success btn-lg opacity-75"
+                <a href="/admin/adminUserList" class="btn btn-success btn-lg opacity-75"
                   >회원목록 페이지로</a
                 >
                 </div>
@@ -48,11 +48,9 @@
                             <%-- 질문 출력 --%>
                             ${question.QUESTION_LIST} 
                           </th>
-                    </c:forEach>
-                    <c:forEach var="resultData" items="${resultMap}" varStatus="status" >
                           <th>
                             <%-- 답변 출력 --%>
-                            ${resultData.ANSWER_LIST}
+                            ${resultMap[status.index].ANSWER_LIST}
                           </th>
                       </tr>
                     </c:forEach>

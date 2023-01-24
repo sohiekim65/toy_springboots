@@ -28,7 +28,7 @@
       <main class="mt-5 p-1">
         <div class="mt-5">
             <div class="fs-3 text-center text-success opacity-75 mb-3">회원 정보 수정</div>
-            <form action="/mango/modify_done" method="post">
+            <form action="/admin/modify_done" method="post">
                 <table class="table text-center">
                     <thead>
                         <tr class="table-success opacity-75">

@@ -37,7 +37,7 @@
             반려동물에 대한 여러분의 생각은 어떠신가요?
           </div>
            <div class=" d-flex justify-content-center">
-            <a href="/survey/surveyServelts" class="btn btn-success opacity-75">설문 시작</a>
+            <a href="/survey/survey" class="btn btn-success opacity-75">설문 시작</a>
           </div>
          
 

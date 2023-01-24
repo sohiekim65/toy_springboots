@@ -20,7 +20,7 @@
       <main class="p-5">
         <div class="fs-2 text-success opacity-75 mt-5 text-center">회원가입이 완료되었습니다!</div>
         <div class="text-center mt-3">
-          <a href="/mango/main" class="btn btn-success btn-lg opacity-75"
+          <a href="/admin/main" class="btn btn-success btn-lg opacity-75"
             >메인 페이지로</a
           >
         </div>

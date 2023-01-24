@@ -28,7 +28,7 @@
       <main class="mt-5 p-1">
         <div class="row mt-5 text-center">
           <div class="col-12 col-md-6 mx-auto">
-            <form action="/mango/main" method="post">
+            <form action="/admin/main" method="post">
               <div class="mb-4">
                 <img
                   src="/resources/img/hedgehog.png"
@@ -102,7 +102,7 @@
                 </div>
                 <div class="row">
                   <a
-                    href="/mango/signUp_form"
+                    href="/admin/signUp_form"
                     class="col form-control btn btn-secondary btn-lg fs-5"
                   >
                     회원가입</a

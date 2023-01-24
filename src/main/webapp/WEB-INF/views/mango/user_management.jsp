@@ -24,7 +24,7 @@
       <main class="mt-5 p-1">
           <div class="mt-5">
             <div class="fs-3 text-center text-success opacity-75 mb-3">회원관리 페이지</div>
-            <form action="/admin/userList">
+            <form action="/admin/searchSurveyor" method="post">
               <div class="d-flex input-group w-50">
                 <select class="form-select" name="keyField" id="">
                   <option value="NAME">이름</option>
@@ -47,9 +47,9 @@
                 </tr>
               </thead>
               <tbody class="align-middle">
-                <c:forEach var="resultData" items="${resultMap}" varStatus="loop">
+                <c:forEach var="resultData" items="${resultMap}" begin="1" varStatus="loop">
                   <tr>
-                  <form action="/mango/surveyorSurveyResult" method="post">
+                  <form action="/admin/surveyorSurveyResult" method="post">
                     <th>${resultData.USER_ID}</th>
                     <th>${resultData.NAME}</th>
                     <th>${resultData.BIRTH_DATE}</th>
@@ -61,14 +61,14 @@
                   </form>
                     <th>
                       <div class="d-flex justify-content-center">
-                        <form action="/mango/modify" method="post">  
+                        <form action="/admin/modify" method="post">  
                           <input type="submit" class="btn btn-outline-secondary opacity-75" value="수정"/>
                           <input type="hidden" name="user_id" value='${resultData.USER_ID}'/>
                           <input type="hidden" name="user_name" value="${resultData.NAME}"/>
                           <input type="hidden" name="birth_date" value="${resultData.BIRTH_DATE}"/>
                           <input type="hidden" name="phone" value="${resultData.PHONE}"/>
                         </form>
-                        <form class="ms-1" action="/mango/delete" method="post">
+                        <form class="ms-1" action="/admin/delete" method="post">
                             <input type="submit" class="btn btn-outline-danger" value="삭제" onclick="if(!confirm('정말로 삭제하시겠습니까?')) return false"/>
                             <input type="hidden" name="user_id" value='${resultData.USER_ID}'/>
                         </form>

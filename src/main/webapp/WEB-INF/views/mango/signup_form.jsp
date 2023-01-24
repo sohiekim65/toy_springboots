@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,18 +19,18 @@
     <div class="container-fluid pb-5">
 
       <%@ include file="header.jsp" %>
-      <form action="/mango/signUp_done" method="post">
+      <form action="/admin/signUp_done" method="post">
       <main class="mt-5 p-1">
         <div class="row mt-5 text-center">
           <div class="col-12 col-md-6 mx-auto">
-            <form action="/mango/signUp_done" method="post">
+            <form action="/admin/signUp_done" method="post">
               <div class="fs-2 text-success opacity-75 mb-3">회원가입</div>
               <div class="row">
                 <div class="col input-group">
                   <div class="input-group mb-2">
                     <input
                       type="text"
-                      name="id-memeber"
+                      name="user_id"
                       class="form-control opacity-75"
                       id="id-memeber"
                       placeholder="아이디"
@@ -38,6 +39,9 @@
                     
                   </div>
                 </div>
+                <c:if test="${not empty msg}">
+                  <div class="text-secondary">${msg}</div>
+                </c:if>
                 <div id="password-member">
                   <input
                     type="password"

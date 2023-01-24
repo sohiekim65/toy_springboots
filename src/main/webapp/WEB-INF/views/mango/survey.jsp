@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.HashMap, java.util.ArrayList" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,14 +19,10 @@
   </head>
 
   <body class="bg-light">
-  <% 
-    ArrayList<HashMap> question_list = (ArrayList<HashMap>)request.getAttribute("question_list");
-    ArrayList<HashMap> answers_list = (ArrayList<HashMap>)request.getAttribute("answers_list");
-  %>
     <div class="container pb-5">
       <%@ include file="header.jsp" %>
       <main class="mt-5 p-1">
-        <form action="/survey/surveyResultServletsTest" method="post">
+        <form action="/survey/surveyResult" method="post">
           <div class="row" style="margin-top: 8%">
           <%-- 설문버튼 --%>
             <div class="ms-2" style="width: 8rem">
@@ -50,31 +47,25 @@
               <table class="table text-center table-striped" style="width: 90%">
                 <tbody>
               <%-- 질문 출력 --%>
-              <% 
-                  for (int i = 0; i < question_list.size(); i++){ 
-                    HashMap<String,Object> question = question_list.get(i);
-              %>
+              <c:forEach var="question" items="${questionList}" varStatus="loop">
                 <tr>                  
                     <th class="text-center" colspan="5"> 
-                      <%= question.get("QUESTION_LIST") %> 
+                        ${question.QUESTION_LIST}
                     </th>
                 </tr>
                 <tr>
                   <td>답</td>
                   <%-- 답변 출력 --%>
-                  <%
-                    for(int j = 0; j < answers_list.size(); j++){
-                      HashMap<String,Object> answers = answers_list.get(j);
-                  %>
+                  <c:forEach var="answer" items="${answerList}" varStatus="loop">
                     <td>
-                      <input type="radio" class="form-check-input" name="<%= question.get("QUESTION_UID") %>" id="<%= question.get("QUESTION_UID") %><%= answers.get("ANSWER_UID") %>" value="<%= answers.get("ANSWER_UID") %>" required="required"/>
-                      <label for="<%= question.get("QUESTION_UID") %><%= answers.get("ANSWER_UID") %>" class="form-check-label">
-                        <%= answers.get("ANSWER_LIST") %>
+                      <input type="radio" class="form-check-input" name="${question.QUESTION_UID}" id="${question.QUESTION_UID}${answer.ANSWER_UID}" value="${answer.ANSWER_UID}" required="required"/>
+                      <label for="${question.QUESTION_UID}${answer.ANSWER_UID}" class="form-check-label">
+                        ${answer.ANSWER_LIST}
                       </label>
                     </td>
-                  <% } %>
+                  </c:forEach>
                   </tr>
-                <% } %>
+                </c:forEach>
                 </tbody>
               </table>
             </div>
