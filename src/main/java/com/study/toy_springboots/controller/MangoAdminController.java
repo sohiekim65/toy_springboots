@@ -1,5 +1,8 @@
 package com.study.toy_springboots.controller;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.study.toy_springboots.service.MangoAdminService;
+import com.study.toy_springboots.utils.MangoUtils;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -18,6 +23,9 @@ public class MangoAdminController {
 
     @Autowired
     MangoAdminService mangoSurveyService;
+
+    @Autowired
+    MangoUtils mangoUtils;
 
     // 회원가입 페이지 이동
     @RequestMapping(value = {"/signUp_form"}, method = RequestMethod.GET)
@@ -106,6 +114,29 @@ public class MangoAdminController {
         Object resultMap = mangoSurveyService.getSearchSurveyor(params);
         modelAndView.addObject("resultMap", resultMap);
         modelAndView.setViewName("mango/admin_searchUserInfo");
+        return modelAndView;
+    }
+
+    // 업로드하기 클릭 시
+    @RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
+    public ModelAndView fileUpload(@RequestParam Map<String, Object> params, ModelAndView modelAndView) {
+        modelAndView.setViewName("mango/admin_fileUpload");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/fileUploadDone", method = RequestMethod.POST)
+    public ModelAndView fileUploadDone(MultipartHttpServletRequest multipartHttpServletRequest
+                    , @RequestParam Map<String, Object> params
+                    , ModelAndView modelAndView) {
+
+        List attachfiles = mangoUtils.getAttachFiles(multipartHttpServletRequest, params);
+
+        params.put("attachfiles", attachfiles);
+        
+        Object resultMap = mangoSurveyService.insertWithFilesAndGetList(params);
+        modelAndView.addObject("resultMap", resultMap);
+
+        modelAndView.setViewName("mango/user_management");
         return modelAndView;
     }
 }

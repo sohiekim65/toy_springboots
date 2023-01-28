@@ -1,0 +1,191 @@
+-----------------------1교시-------------------------------
+* 클래스 다이어그램
+public int sumScore() {
+	int result = 0;		--> int형으로 return값이 없으면 오류가 뜬다
+	//TODO
+	return result;
+}
+
+public double avgScore(int div){    // div는 파라미터다
+	double result = 0.0;
+	return result;
+}
+
+-------------------------2교시--------------------------------
+* 클래스 다이어그램
+필드/ 메소드 (밑줄)  ==> 예약어 static
+대문자               ==> 예약어 final
+기울임               ==> 예약어 abstract
+
+final static / static final : 순서 상관 없음
+
+순서
+접근제한자 옵션(final, abstract) 자료형 변수명;
+				 리턴형 메소드명;
+ --> public abstract void goToSchool();   // 뒤에 { } 안 붙는다
+     public void abstract goToSchool();	  //xxxxxx void 위치 틀림
+     { }가 안 붙는 이유 나중에 얘를 사용할 애가 가져가서 구체화 시킬거임
+
+     메소드가 abstract가 붙으면 해당 클래스 이름에도 abstract 붙여주기
+     public abstract class Student{
+        public abstract void goToSchool();
+     }
+
+
+접근제한자를 안 적으면 default를 뜻한다.
+
+
+* 다른 클래스에서 SCHOOL_NAME 이라는 변수에 접근하고 싶다.
+Student.  에서 .은 접근 연산자.
+클래스 이름으로 접근하는건 static만 가능하고  나머지는 생성한 객체에서 접근 가능 
+	-> Student s1 = new Student(){} 이런거 해준 뒤 접근 가능
+
+private는 애초에 접근 못함 -> 자신이 속한 클래스 안에서만 접근 가능
+
+default 상태에서는 같은 패키지 안에서만 접근 가능. 같은 패키지가 아니라면 접근 불가능
+
+protected 상속을 한 클래스에서는 접근 가능, 같은 패키지 속이라면 굳이 상속을 안해도 된다.
+즉, 상속 클래스의 경우 접근 가능, 같은 패캐지의 경우 접근 가능.
+같은 패키지가 아닐 경우 extends (상속받는 클래스명){}으로 상속 받아주면 바로 접근 가능
+
+나의 클래스 안에도 name이란 변수가 있고 나의 부모 클래스에도 name이란 변수가 있을 경우
+나랑 가까운 위치의 name을 접근하게 된다. 상속받은 부모 클래스의 name을 접근하고 싶으면
+사용하는 name선언 앞에 super.를 붙여주면 된다.
+
+public은 어디서든 나를 객체로 만든 인스턴스를 만든다면 접근 가능해
+
+--------------------------3교시----------------------------------------
+
+main이 있는 곳에서 ctrl + f11 실행을 해줘야 함
+
+상속이란 내가 만들지 않았지만 부모가 만들어 놓은 것을 가져다 쓸 수 있다는 것
+
+getter 작성법 - getter는 읽기
+public int getNum(){
+	return num;
+}
+
+setter 작성법 - setter는 쓰기
+public void setNum(int num){   // num은 파라미터
+	this.num = num;
+}
+
+getter, setter라는 기능(공간)을 통해서 값을 바꾼다.
+필드는 거의 무조건 private!!
+getter, setter의 접근 제한자를 바꾸면 getter만 작동시킨다든지 setter만
+작동시킨다든지 변경 가능하다.
+
+child 클래스의 이름에 extends Parent를 추가하면 Parent에 있는 것을 쓸 수 있다.
+ --> public class Child extends Parent{}
+
+
+--------------------------4교시-------------------------------
+* 접근제한자 
+1. private 
+필드에 public을 주는 경우는 static 빼고는 없음. 
+필드는 대부분 private이다. 99% 그리고 세트로 getter와 setter를 만들어준다.
+
+2. public
+import는 접근제한자와 전혀 상관이 없다. 상속과도 상관없다.
+
+3. protected
+child는 parent에 있는 것을 쓸 수 있다. 부모꺼 내꺼, 내껀 내꺼. 
+child의 num은 parent에 있는 num이다. 만약 child에 private int num;이라 추가하면 그건 부모의 num이 아니라
+child의 num이다. 
+public void insert(int num)의 파라미터 num은 부모 num, 나의 클래스에 있는 지역변수 num, 지역변수 num 중
+그건 부모의 num이 아니라 지역변수의 num
+
+나는 내 클래스에 있는 지역변수에다가 값을 넣고 싶어 -> this.num = 20; 추가
+나는 부모에게 있는 필드에 값을 넣고 싶어 -> super.num = 20; 추가
+
+public void out() {
+System.out.println(num);   -> 여기서 num은 로컬 num{}에 안싸여 있으니 this.num이다.
+}
+
+4. protected
+parent는 protected가 걸려있으면 TestProtected에 extends Parent를 써주거나 패키지가 같아야 한다.
+그래서 parent에 있는 num에 접근할 수 없다.
+TestProtected에서 child.inset(10); 으로 넣어주면 child의 num이 10으로 바뀌고 parent의 insrt(int num) 10으로 바뀐다.
+해당 클래스 내에 있는 super.num의 값도 10으로 바뀐다.
+public class Child extends Parent {
+	public void insert(int num) {     // int num에서 10이 들어가고
+		num = 10;
+		this.num = num;		 
+		super.num = num;	// 여기도 10이 들어감
+	}
+	public void out() {
+		System.out.println(num);
+	}
+}
+
+== parent를 상속받으려면 child에서 상속 구조로 만들어주고 클래스를 구성하면 된다.
+
+어떤 클래스(부모) 접근하려면 그 클래스를 상속받는 클래스를 만들고 상속받는 클래스가 
+public으로 method를 만들어(위에 있는 코드처럼) 두면 된다.
+
+default
+default2가 test파일에 import가 없는 이유는 같은 패키지라서.
+default1의 접근제한자가 안적혀 있다 = default라는 의미고 dt1.num의 접근이 불가
+default2에서 num2는 dt2에 접근이 가능
+
+
+--------------------------5교시--------------------------------------
+클래스 구조
+[접근제한자][클래스 식별자]class 클래스 이름
+클래스 식별자에는 final, abstract가 들어갈 수 있다.
+
+final = 나를 부모로 삼는 자식은 없을 거다 
+parent 클래스에서 final예약자를 붙여주면 child 클래스에서 chld extends parent하면 오류가 생김(final이라서)
+
+누군가 나를 extends하면 부모가 되어짐.
+extends는 내가 누굴 부모로 삼을지 정해줌
+
+abstract = 상속을 하는 애가 있다면 그 상속 하는 애에서 부모의[미완성된 기능( = abstract method)]을 완성시킨다.
+즉 abstract가 있으면 미완성된 메소드가 있다.
+
+abstract를 쓰면 키워드가 쏟아진다.(implements, (상속을 하려면)extends 등)
+
+나의 클래스 안에 abstract기능을 하는 메소드가 있으면 나의 클래스에도 abstract를 적어줘야 한다
+
+public >>>abstract<<< class Parent {
+	protected int num;
+	
+	public >>>abstract<<< void goToSchool();
+}
+
+child클래스에 접근제한자가 없어도 된다(public 지움 = default 상황)
+default는 두 패키지가 같아야 사용 가능 -> 다른 패키지면 import도 안된다 (접근이 안되니까)
+	clss Child {
+
+	}
+
+public은 반드시 같은 이름의 클래스에서만 줄 수 있다.
+(public class Bank{
+   public ~
+ } 이런식으로 public이 같아야 한다
+
+5교시
+생성자에는 리턴 자료형이 없다.(생성의 결과물이 공간 만들고 끝이기 때문에 없다) = 그래서 리턴 타입은 적지 않는다.
+생성자는 클래스 이름과 똑같아야 하고 리턴 타입은 적지 않는다.
+public BankAccount(String name, String id){
+	
+}
+
+final필드가 있다면 생성자에서는 final 필드를 초기화 시켜주는 기능을 넣어줘야함 
+생성자 마다 다 넣어줘야 함
+final 필드가 없다면 안해줘도 됨.
+
+
+생성자 어떤 거를 명시해서 적게되면 기존에 있던 생성자는 사라지게 된다.
+
+
+필드일 경우 초기값을 안넣어도 되는데 생성을 할 때 생성자에서 자료형의 기본 값(default)으로 초기값을 세팅한다.
+-> final은 예외. final인 경우에는 반드시 생성을 할 때 초기화를 해주고 초기값을 넣어줘야하고 나머지들은 default값으로 초기값을 준다. 
+   필드에 자료형에 default값으로 초기값이 기본적으로 대입되서 들어감
+
+
+point 에서 p2는 10,20을 세팅해서 10,20 결과값이 나오고 p1은 생성할 때 형 비워서 해서 자료형 기본 값인 0, 0 으로 나오고
+setter을 이용해서 값 대입해서 12,23이 나오는 것
+
+그래서 p1 처음은 자료형 기본값인 0,0이 들어감
+

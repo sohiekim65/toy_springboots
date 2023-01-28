@@ -19,4 +19,5 @@ public class MangoSurveyDao {
         Object result = sqlSessionTemplate.selectList(sqlMapId, dataMap);
         return result;
     }
+
 }

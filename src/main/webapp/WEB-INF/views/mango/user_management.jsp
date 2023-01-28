@@ -24,17 +24,26 @@
       <main class="mt-5 p-1">
           <div class="mt-5">
             <div class="fs-3 text-center text-success opacity-75 mb-3">회원관리 페이지</div>
-            <form action="/admin/searchSurveyor" method="post">
-              <div class="d-flex input-group w-50">
-                <select class="form-select" name="keyField" id="">
-                  <option value="NAME">이름</option>
-                  <option value="BIRTH_DATE">생년월일</option>
-                  <option value="PHONE">전화번호</option>
-                </select>
-                <input class="form-control w-50" type="text" name="keyWord" id="">
-                <button type="submit" class="btn btn-success opacity-75">검색</button>
-              </div>
-            </form>
+            <div class="d-flex justify-content-between">
+              <form action="/admin/searchSurveyor" method="post">
+                <div class="d-flex input-group flex-fill">
+                  <select class="form-select" name="keyField" id="">
+                    <option value="NAME">이름</option>
+                    <option value="BIRTH_DATE">생년월일</option>
+                    <option value="PHONE">전화번호</option>
+                  </select>
+                  <input class="form-control w-50" type="text" name="keyWord" id="">
+                  <button type="submit" class="btn btn-success opacity-75">검색</button>
+                </div>
+              </form>
+              <form action="/admin/fileUpload" method="post">
+                <div>
+                  <button class="btn btn-outline-secondary">
+                    회원추가
+                  </button>
+                </div>
+              </form>
+            </div>
             <table class="table text-center mt-3">
               <thead>
                 <tr class="table-success opacity-75">

@@ -10,6 +10,9 @@ public class MangoAdminService {
     @Autowired
     MangoAdminDao mangoSurveyDao;
 
+    @Autowired
+    AttachFileService attachFileService;
+
     public Object getSurveyorList(Object dataMap) {
         String sqlMapId = "MangoAdmin.selectFromSurveyorList";
         Object result = mangoSurveyDao.getSurveyorList(sqlMapId, dataMap);
@@ -27,7 +30,7 @@ public class MangoAdminService {
         Object result = mangoSurveyDao.insertJoinSurveyor(sqlMapId, dataMap);
         return result;
     }
-
+    
     // delete하고 List 출력
     public Object deleteSurveyorAndGetList(Object dataMap){
         Object result = this.deleteSurveyor(dataMap);
@@ -82,4 +85,18 @@ public class MangoAdminService {
         return result;
     }
 
+    // 0126 파일업로드
+    public Object insertMulti(Object dataMap) {
+        String sqlMapId = "AttachFile.insertMulti";
+        Object result = mangoSurveyDao.insertJoinSurveyor(sqlMapId, dataMap); // 재사용
+        return result;
+    }
+
+    // 0126 파일업로드하고 List를 뱉어내는 function
+    public Object insertWithFilesAndGetList(Object dataMap) {
+        Object result = attachFileService.insertMulti(dataMap);
+        result = this.insertJoinSurveyor(dataMap); // 회원 추가
+        result = this.getSurveyorList(dataMap);
+        return result;
+    }
 }
