@@ -145,7 +145,6 @@ public class MangoAdminController {
     public ModelAndView listPagination(@RequestParam Map<String, Object> params
             , @PathVariable String currentPage, ModelAndView modelAndView) {
         params.put("currentPage", Integer.parseInt(currentPage));
-        params.put("pageScale", 10);
         Object resultMap = mangoSurveyService.getListWithPagination(params);
         modelAndView.addObject("resultMap", resultMap);
         modelAndView.setViewName("mango/user_management");
