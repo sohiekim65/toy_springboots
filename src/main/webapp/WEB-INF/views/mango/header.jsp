@@ -42,7 +42,7 @@
               <a href="/admin/signUp_form" class="btn btn-success opacity-75">회원가입</a>
             </c:when>
             <c:when test='${resultMap.PASSWORD eq "1229"}'> --%>
-              <a href="/admin/adminUserList" class="btn btn-secondary me-2">회원관리</a>
+              <a href="/admin/adminUserList/1" class="btn btn-secondary me-2">회원관리</a>
               <a href="/admin/signUp_form" class="btn btn-success opacity-75">회원가입</a>
               <%-- <a href="/admin/login" class="btn btn-secondary me-2">로그인</a>
               <a href="/admin/main" class="btn btn-success opacity-75">로그아웃</a> --%>

@@ -1,9 +1,13 @@
 package com.study.toy_springboots.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.study.toy_springboots.dao.MangoAdminDao;
+import com.study.toy_springboots.utils.Paginations;
 
 @Service
 public class MangoAdminService {
@@ -97,6 +101,25 @@ public class MangoAdminService {
         Object result = attachFileService.insertMulti(dataMap);
         result = this.insertJoinSurveyor(dataMap); // 회원 추가
         result = this.getSurveyorList(dataMap);
+        return result;
+    }
+
+    // 0130 페이지네이션 total과 list
+    public Object getListWithPagination(Object dataMap) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        int totalCount = (int) this.getTotal(dataMap);
+        int currentPage = (int) ((Map<String, Object>) dataMap).get("currentPage");
+        Paginations paginations = new Paginations(totalCount, currentPage);
+        result.put("paginations", paginations);
+        ((Map<String, Object>) dataMap).put("pageBegin", paginations.getPageBegin());
+        result.put("resultList", this.getSurveyorList(dataMap));
+        return result;
+    }
+
+    // 0130 페이지네이션 total
+    public Object getTotal(Object dataMap) {
+        String sqlMapId = "MangoAdmin.selectTotal";
+        Object result = mangoSurveyDao.getSurveyorOne(sqlMapId, dataMap);
         return result;
     }
 }

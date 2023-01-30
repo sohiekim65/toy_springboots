@@ -56,7 +56,7 @@
                 </tr>
               </thead>
               <tbody class="align-middle">
-                <c:forEach var="resultData" items="${resultMap}" begin="1" varStatus="loop">
+                <c:forEach var="resultData" items="${resultMap.resultList}" begin="1" varStatus="loop">
                   <tr>
                   <form action="/admin/surveyorSurveyResult" method="post">
                     <th>${resultData.USER_ID}</th>
@@ -88,6 +88,29 @@
               </tbody>
             </table>
           </div>
+        <%-- pagination --%>
+        <nav aria-label="Page navigation example">
+          <c:set var="_pagination" value="${resultMap.paginations}" />
+          <span>총 갯수 : ${_pagination.totalCount}</span>
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <%-- for(int i = 0; i > 9; i++){} --%>
+            <c:forEach var="i" begin="${_pagination.blockStart}" end="${_pagination.blockEnd}">
+              <li class="page-item"><a class="page-link" href="/admin/adminUserList/${i}">${i}</a></li>
+            </c:forEach>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span class="sr-only">Next</span>
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </main>
     </div>
     <hr />

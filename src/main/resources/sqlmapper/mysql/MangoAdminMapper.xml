@@ -8,6 +8,16 @@
     <select id="selectFromSurveyorList" parameterType="Map" resultType="Map">
         SELECT * 
         FROM SURVEYOR
+        <if test="pageScale != null">
+            ORDER BY NAME
+            LIMIT #{pageBegin}, #{pageScale}
+        </if>
+    </select>
+
+    <!-- 0130 call MangoAdmin.selectTotal -->
+    <select id="selectTotal" parameterType="Map" resultType="int">
+        SELECT count(*) as cnt
+        FROM SURVEYOR
     </select>
 
     <!-- call MangoAdmin.selectSurveyorOneByUIDPassword -->

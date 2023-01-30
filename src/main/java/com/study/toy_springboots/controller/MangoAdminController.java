@@ -58,13 +58,13 @@ public class MangoAdminController {
     }
 
     // admin의 회원관리 페이지 이동 = 회원 목록 출력
-    @RequestMapping(value = "/adminUserList", method = RequestMethod.GET)
-    public ModelAndView adminSurveyorList(@RequestParam Map<String, Object> params, ModelAndView modelAndView) {
-        Object resultMap = mangoSurveyService.getSurveyorList(params);
-        modelAndView.addObject("resultMap", resultMap);
-        modelAndView.setViewName("mango/user_management");
-        return modelAndView;
-    }
+    // @RequestMapping(value = "/adminUserList", method = RequestMethod.GET)
+    // public ModelAndView adminSurveyorList(@RequestParam Map<String, Object> params, ModelAndView modelAndView) {
+    //     Object resultMap = mangoSurveyService.getSurveyorList(params);
+    //     modelAndView.addObject("resultMap", resultMap);
+    //     modelAndView.setViewName("mango/user_management");
+    //     return modelAndView;
+    // }
 
     // admin 회원 삭제 후 리스트 출력 --> 아이디 안보이도록 hidden params로
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -136,6 +136,18 @@ public class MangoAdminController {
         Object resultMap = mangoSurveyService.insertWithFilesAndGetList(params);
         modelAndView.addObject("resultMap", resultMap);
 
+        modelAndView.setViewName("mango/user_management");
+        return modelAndView;
+    }
+
+    // 0130 페이지네이션 추가
+    @RequestMapping(value = {"/adminUserList/{currentPage}"}, method = RequestMethod.GET)
+    public ModelAndView listPagination(@RequestParam Map<String, Object> params
+            , @PathVariable String currentPage, ModelAndView modelAndView) {
+        params.put("currentPage", Integer.parseInt(currentPage));
+        params.put("pageScale", 10);
+        Object resultMap = mangoSurveyService.getListWithPagination(params);
+        modelAndView.addObject("resultMap", resultMap);
         modelAndView.setViewName("mango/user_management");
         return modelAndView;
     }
