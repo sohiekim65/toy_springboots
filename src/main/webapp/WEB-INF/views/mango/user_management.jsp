@@ -94,7 +94,7 @@
           <span>총 갯수 : ${_pagination.totalCount}</span>
           <ul class="pagination">
             <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
+              <a class="page-link" href="/admin/adminUserList/${_pagination.previousPage}" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">Previous</span>
               </a>
@@ -104,7 +104,7 @@
               <li class="page-item"><a class="page-link" href="/admin/adminUserList/${i}">${i}</a></li>
             </c:forEach>
             <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
+              <a class="page-link" href="/admin/adminUserList/${_pagination.nextPage}" aria-label="Next">
                 <span class="sr-only">Next</span>
                 <span aria-hidden="true">&raquo;</span>
               </a>
