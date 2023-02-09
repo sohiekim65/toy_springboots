@@ -89,7 +89,7 @@
             </table>
           </div>
         <%-- pagination --%>
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example ">
           <c:set var="_pagination" value="${resultMap.paginations}" />
           <span>총 갯수 : ${_pagination.totalCount}</span>
           <ul class="pagination">

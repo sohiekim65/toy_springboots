@@ -1,4 +1,4 @@
-<%-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -18,10 +18,10 @@
       <div>Main ! JSP</div>
       <div>toy_springboots mango main</div>
       <div>
-        <a href="/admin/main">
+        <a href="/main">
           /toy_springboots mango Controller form() /admin/a_main.jsp
         </a>
       </div>
     </div>
   </body>
-</html> --%>
+</html>
