@@ -25,16 +25,12 @@ public class HomeController {
     @GetMapping({"/"})
     public ModelAndView securityMain( ModelAndView  modelAndView) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        
+        String username = null;
         if (principal instanceof UserDetails) {
-            System.out.println(((UserDetails)principal).getUsername());
-            System.out.println(((UserDetails)principal).getPassword());
-            System.out.println(((UserDetails)principal).getAuthorities());
-            System.out.println(((UserDetails)principal).isAccountNonExpired());
-            System.out.println(((UserDetails)principal).isAccountNonLocked());
-            System.out.println(((UserDetails)principal).isCredentialsNonExpired());
-            System.out.println(((UserDetails)principal).isEnabled());
+            username = ((UserDetails)principal).getUsername();
         } else {
-                String username = principal.toString();
+            username = principal.toString();
         }
         String viewName = "main";
         modelAndView.setViewName(viewName);
